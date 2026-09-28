@@ -6,16 +6,20 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Entity
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false)
     private Long id;
-    @Column(name = "name", nullable = false)
-    private String name;
 
+    @Column(nullable = false)
+    private String name;
+    private String email;
+
+    public Member(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
 }
