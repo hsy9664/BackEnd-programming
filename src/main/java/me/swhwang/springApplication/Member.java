@@ -22,4 +22,8 @@ public class Member {
         this.name = name;
         this.email = email;
     }
+
+    public Member(String name) {
+        this.name = name;
+    }
 }
