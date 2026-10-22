@@ -1,10 +1,7 @@
 package me.swhwang.springApplication;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @NoArgsConstructor
 @Getter
@@ -12,17 +9,11 @@ import lombok.NoArgsConstructor;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id", updatable = false)
     private Long id;
-
-    @Column(nullable = false)
+    @Column(name="name", nullable = false)
+    @Setter(AccessLevel.PUBLIC)
     private String name;
-    private String email;
-
-    public Member(String name, String email) {
-        this.name = name;
-        this.email = email;
-    }
-
     public Member(String name) {
         this.name = name;
     }
