@@ -3,6 +3,7 @@ package me.swhwang.springApplication.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.swhwang.springApplication.dao.Article;
 import me.swhwang.springApplication.dto.ArticleCreationRequest;
+import me.swhwang.springApplication.repository.BlogRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.List;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -28,6 +28,9 @@ class BlogApiControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    BlogRepository blogRepository;
+
     @DisplayName("addArticle: 블로그 글 추가에 성공한다.")
     @Test
     public void addArticle() throws Exception {
@@ -39,12 +42,12 @@ class BlogApiControllerTest {
 
         String articleStr = objectMapper.writeValueAsString(req);
 
-        // 실행 when
+        // 실행 when: POST 요청 실행
         ResultActions result = mockMvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(articleStr));
 
-        // 검증 then
+        // 검증 then: 데이터베이스에 정상적으로 저장되었는지 확인
         List<Article> articles = blogRepository.findAll();
         assertThat(articles.size()).isEqualTo(1);
         Article article = articles.get(0);
