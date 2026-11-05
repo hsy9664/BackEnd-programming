@@ -80,15 +80,11 @@ class BlogApiControllerTest {
         final String title = "11월 5일 두번째 시간";
         final String content = "모든 블로그 글 조회 테스트 코드 작성";
 
-        blogRepository.save(Article.builder()
-                .title(title)
-                .content(content)
-                .build());
+        blogRepository.save(Article.builder().title(title).content(content).build());
 
         // when
         final ResultActions resultActions =
-                mockMvc.perform(get(url)
-                        .accept(MediaType.APPLICATION_JSON));
+                mockMvc.perform(get(url).accept(MediaType.APPLICATION_JSON));
 
         // then
         resultActions
