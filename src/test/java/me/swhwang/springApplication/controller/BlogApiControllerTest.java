@@ -77,7 +77,7 @@ class BlogApiControllerTest {
     public void findAllArticles() throws Exception {
         // given
         final String url = "/api/articles";
-        final String title = "11월 5일 두번째 시간";
+        final String title = "11월 5일";
         final String content = "모든 블로그 글 조회 테스트 코드 작성";
 
         blogRepository.save(Article.builder().title(title).content(content).build());
